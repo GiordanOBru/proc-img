@@ -1,25 +1,55 @@
-from PIL import Image
+import cv2
+
 import numpy as np
-import matplotlib.pyplot as plt
 
-M = Image.open("imagens\cubo.png")
+def reducao_vizinho(img):
+    largura = img.shape[0]
+    altura = img.shape[1]
+    img_nova = np.zeros((int(largura/2), int(altura/2), img.shape[2]))
+    aux_largura = 0
+    aux_altura = 0 
 
-M = np.asarray(M, dtype=np.float32)/255
+    for i in range(0, int(largura/2)):
+        aux_largura = 0
+        for j in range(0, int(altura/2)):
+            img_nova[i][j] = img[aux_altura][aux_largura]
+            aux_largura += 2
+        aux_altura += 2
 
-#M[99:200,:,0] = 0
+    return img_nova    
 
-#M[99:200,:,1] = 0
+def ampliacao_vizinho(img):
+    largura = img.shape[0]
+    altura = img.shape[1]
+    n_largura = int(largura*2)
+    n_altura = int(altura*2)
+    img_nova = np.zeros((n_largura, n_altura, img.shape[2]))
+    aux_largura = 0
+    aux_altura = 0
 
-MTR = np.transpose(M[:,:,0])
-MTG = np.transpose(M[:,:,1])
-MTB = np.transpose(M[:,:,2])
+    for i in range(0, n_largura, 2):
+        aux_largura = 0
+        for j in range(0, n_altura, 2):
+            img_nova[i][j] = img[aux_altura][aux_largura]
+            aux_largura += 1
+        aux_altura += 1
 
-MT = np.zeros((544,519,3))
+    for i in range(0, n_largura - 1, 2):
+        for j in range(0, n_altura - 1, 2):
+            img_nova[i][j+1] = img_nova[i][j]
+            img_nova[i+1][j] = img_nova[i][j]
+            img_nova[i+1][j+1] = img_nova[i][j]
 
-MT[:,:,0], MT[:,:,1], MT[:,:,2] = MTR, MTG, MTB
+    return img_nova
 
-plt.figure(figsize=(3,3))
-im = plt.imshow(MT, aspect='auto')
-plt.axis("off")
-plt.show()
-print(MT.shape)
+def main():
+    imagem = cv2.imread('imagens\cubo.png')
+    img_reduzida = reducao_vizinho(imagem)
+    img_ampliada = ampliacao_vizinho(imagem)
+
+    cv2.imwrite('./imagens/cubo_reduzido.png', img_reduzida)
+    cv2.imwrite('./imagens/cubo_ampliado.png', img_ampliada)
+
+if __name__ == '__main__':
+    main()
+        
