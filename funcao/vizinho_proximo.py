@@ -67,8 +67,8 @@ def main():
     img_ampliada = ampliacao_vizinho(imagem)
 
     #gera nova imagem 
-    cv2.imwrite('./imagens/cubo_reduzido.png', img_reduzida)
-    cv2.imwrite('./imagens/cubo_ampliado.png', img_ampliada)
+    cv2.imwrite('./imagens/cubo_reduzido_vizinho.png', img_reduzida)
+    cv2.imwrite('./imagens/cubo_ampliado_vizinho.png', img_ampliada)
 
 if __name__ == '__main__':
     main()
