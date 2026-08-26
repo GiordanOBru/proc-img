@@ -17,10 +17,9 @@ def reducao_bilinear(img):
     for i in range(0, int(largura/2)):
         aux_largura = 0
         for j in range(0, int(altura/2)):
-            #copia o pixel da imagem original na nova imagem
+            #copia o pixel da imagem original na nova imagem pegando os 4 ao redor e fazendo a média
             # (f(i,j) +f(i,j+1) + f(i+1,j) + f(i+1,j+1)) / 4
-            media_reducao = (img[aux_altura][aux_largura]+img[aux_altura][aux_largura+1]
-                             +img[aux_altura+1][aux_largura]+img[aux_altura+1][aux_largura+1])/4
+            media_reducao = (img[aux_altura][aux_largura]+img[aux_altura][aux_largura+1]+img[aux_altura+1][aux_largura]+img[aux_altura+1][aux_largura+1])/4
             img_nova[i][j] = media_reducao
             #ajusta para pegar 2 casas após para reduzir de acordo
             aux_largura += 2
@@ -49,16 +48,22 @@ def ampliacao_bilinear(img):
         for j in range(0, n_altura, 2):
             #insere valores originais na nova matriz
             img_nova[i][j] = img[aux_altura][aux_largura]
-            aux_largura += 1
-        aux_altura += 1
+            aux_largura += 2
+        aux_altura += 2
 
-    #preenche os espaços com o vizinho mais próximo
+    #preenche os espaços com calculo médio dos vizinhos mais próximo
     for i in range(0, n_largura - 1, 2):
         for j in range(0, n_altura - 1, 2):
-            #repete o pixel em 4 posições
-            img_nova[i][j+1] = img_nova[i][j]
-            img_nova[i+1][j] = img_nova[i][j]
-            img_nova[i+1][j+1] = img_nova[i][j]
+            #a = (f(i,j) + f(i,j+1)) / 2
+            img_nova[i][j+1] = (img_nova[i][j]+img_nova[i][i+2])/2
+            #b = (f(i,j) + f(i+1,j)) / 2
+            img_nova[i+1][j] = (img_nova[i][j]+img_nova[i+2][j])/2
+            #c = (f(i,j) + f(i,j+1) + f(i+1,j) + f(i+1,j+1)) / 4 
+            img_nova[i+1][j+1] = (img_nova[i][j]+img_nova[i][j+2]+img_nova[i+2][j]+img_nova[i+2][j+2])/4
+            #d = (f(i,j+1) + f(i+1,j+1)) / 2
+            img_nova[i+1][j+2] = (img_nova[i][j+2]+img_nova[i+2][j+2])/2
+            #e = (f(i+1,j) + f(i+1,j+1)) / 2  
+            img_nova[i+1][j+2] = (img_nova[i+2][j]+img_nova[i+2][j+2])/2
 
     return img_nova
 
@@ -66,11 +71,11 @@ def main():
     #lê imagem e reduz ela e salva em variavel
     imagem = cv2.imread('imagens\cubo.png')
     img_reduzida = reducao_bilinear(imagem)
-    #img_ampliada = ampliacao_bilinear(imagem)
+    img_ampliada = ampliacao_bilinear(imagem)
 
     #gera nova imagem 
-    cv2.imwrite('./imagens/cubo_reduzido.png', img_reduzida)
-    #cv2.imwrite('./imagens/cubo_ampliado.png', img_ampliada)
+    cv2.imwrite('./imagens/cubo_reduzido_bilinear.png', img_reduzida)
+    cv2.imwrite('./imagens/cubo_ampliado_bilinear.png', img_ampliada)
 
 if __name__ == '__main__':
     main()
