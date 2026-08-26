@@ -18,11 +18,12 @@ def reducao_bilinear(img):
         aux_largura = 0
         for j in range(0, int(largura/2)):
             #pega 4 pixels ao redor soma e faz a média
+            
             # f(i,j) +f(i,j+1) 
             linha1 = img[aux_altura][aux_largura]+img[aux_altura][aux_largura+1]
             # f(i+1,j) + f(i+1,j+1)
             linha2 = img[aux_altura+1][aux_largura]+img[aux_altura+1][aux_largura+1]
-
+            
             # (f(i,j) + f(i,j+1) + f(i+1,j) + f(i+1,j+1))/4           
             media_reducao = (linha1+linha2)/4
             img_nova[i][j] = media_reducao
