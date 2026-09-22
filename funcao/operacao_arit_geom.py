@@ -44,7 +44,7 @@ def subtracao_aritmetica(imgA, imgB):
 
     return img_sub
 
-def operacao_geometrica(img):
+def operacao_geo_reflexao(img):
     #define tamanho da imagem
     altura = 260
     largura = 260
@@ -70,7 +70,7 @@ def main():
     imgB = cv2.imread('imagens\imgB.png', cv2.IMREAD_GRAYSCALE)
     img_soma = adicao_aritmetica(imgA, imgB)
     img_sub = subtracao_aritmetica(imgA, imgB)
-    img_geo = operacao_geometrica(imgA)
+    img_geo = operacao_geo_reflexao(imgA)
 
     #gera novas imagens 
     cv2.imwrite('./imagens/soma.png', img_soma)
