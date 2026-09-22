@@ -52,7 +52,27 @@ Para imagens de 8 bits:
 
 \(s = 255 - r\)
 
-A transformação converte **tons claros em escuros e tons escuros em claros**, sendo útil para destacar detalhes claros presentes em regiões predominantemente escuras, como em imagens médicas.
+A transformação converte **tons claros em escuros e tons escuros em claros**, sendo útil para destacar detalhes claros presentes em regiões predominantemente escuras.
+
+## Equalização de Histograma
+
+A **equalização de histograma** é uma técnica utilizada para redistribuir os níveis de intensidade de uma imagem, aumentando o **contraste global** e destacando detalhes.
+
+### Etapas do Algoritmo
+
+1. **Histograma:** conta a quantidade de ocorrências de cada nível de cinza.
+2. **Probabilidade:** calcula a frequência normalizada de cada nível:
+
+\(p_r(r_k) = \frac{n_k}{n}\)
+
+Onde $n_k$ é a quantidade de pixels no nível de cinza $k$ e $n$ é o total de pixels da imagem.
+
+3. **Frequência acumulada (CDF):** soma as probabilidades dos níveis de cinza de forma acumulada.
+4. **Look-Up Table (LUT):** utiliza a CDF para determinar o novo valor de cada nível de cinza:
+
+\(LUT[k] = round\left((L - 1) \times CDF[k]\right)\)
+
+5. **Mapeamento:** substitui cada pixel da imagem original pelo valor correspondente na **LUT**, gerando a imagem com o histograma equalizado.
 
 ## Operações Geométricas
 
