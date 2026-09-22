@@ -23,7 +23,7 @@ def filtro_media(img):
 
             for k in  range(-1,2):
                 for l in range(-1,2):
-                    soma += img_com_bordas[(i+1)+ k,(j+1)+l]
+                    soma += int(img_com_bordas[(i+1)+ k,(j+1)+l])
 
             img_filtro_media[i,j] = soma // 9
 
@@ -31,7 +31,7 @@ def filtro_media(img):
 
 def main():
     #lê imagem na escala cinza
-    imgA = cv2.imread('imagens\cubo.png', cv2.IMREAD_GRAYSCALE)
+    imgA = cv2.imread('imagens/cubo.png', cv2.IMREAD_GRAYSCALE)
     img_filtro_media = filtro_media(imgA)
 
     #gera nova imagem com filtro medio
