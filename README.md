@@ -2,36 +2,53 @@
 
 ## Ampliação e Redução
 
-Nessa primeira etapa, a imagem será organizada utilizando diferentes métodos de ampliação e redução: **vizinho mais próximo, interpolação bilinear e interpolação bicúbica**.
+São utilizados três métodos para alterar a resolução das imagens:
 
-**Vizinho mais próximo:** pega o valor do pixel mais próximo e replica esse valor para preencher os novos pixels. É um método simples e rápido, mas pode deixar a imagem mais pixelada.
+* **Vizinho mais próximo:** utiliza o valor do pixel mais próximo. É simples e rápido, mas pode deixar a imagem pixelada.
+* **Interpolação bilinear:** utiliza os pixels vizinhos para calcular valores intermediários, produzindo uma imagem mais suave.
+* **Interpolação bicúbica:** considera uma quantidade maior de pixels vizinhos, proporcionando maior suavidade e qualidade, porém com maior custo computacional.
 
-**Interpolação bilinear:** considera os pixels vizinhos e calcula o novo valor a partir deles, utilizando uma média ponderada. Na ampliação, utiliza os pixels mais próximos para gerar valores intermediários, deixando a imagem mais suave.
+## Operações Aritméticas
 
-**Interpolação bicúbica:** considera uma quantidade maior de pixels vizinhos para calcular o novo valor, proporcionando uma imagem mais suave e com melhor qualidade. É mais complexa e exige mais processamento que os métodos anteriores.
+As operações aritméticas são realizadas **pixel a pixel** e, normalmente, exigem imagens com as mesmas dimensões.
 
-## Operação Aritmética
+### Adição
 
-As operações aritméticas no processamento de imagens são pontuais (feitas pixel a pixel) e exigem que as imagens de entrada possuam o mesmo tamanho.
+\(s(x,y) = f(x,y) + g(x,y)\)
 
-**Adição de Imagens** ($s(x,y) = f(x,y) + g(x,y)$):
-Finalidade: Realçar similaridades entre imagens.
-Redução de Ruído: Ao calcular a média aritmética de $n$ imagens do mesmo cenário, o ruído eletrônico aleatório tende a ser eliminado.Combinação e Fusão: É utilizada para unir resultados de diferentes etapas de processamento ou revelar fenômenos com respostas espectrais distintas.
-Escalamento: Como a soma direta pode ultrapassar o valor máximo de intensidade (ex.: 255 em imagens de 8 bits), costuma-se calcular a média dos valores.
+Utilizada para:
 
-**Subtração de Imagens** ($d(x,y) = f(x,y) - g(x,y)$):
-Finalidade: Realçar diferenças entre duas imagens.
-Detecção de Mudanças: Regiões resultantes em preto (valor $0$) indicam que não houve alteração entre os frames.
-Aplicações Médicas: Usada na angiografia por subtração digital, na qual subtrai-se uma imagem "máscara" (sem contraste) de uma imagem "ativa" (com contraste) para destacar os vasos sanguíneos. 
+* Combinar ou fundir imagens;
+* Reduzir ruídos por meio da média de várias imagens;
+* Realçar informações presentes em diferentes imagens.
 
-## Operação Geométrica
-Transformações GeométricasAs transformações geométricas alteram a posição espacial dos pixels, mapeando as coordenadas da imagem original $(x_0, y_0)$ para novas posições $(x_d, y_d)$ na imagem resultante. Elas são modeladas por transformações afins (via matrizes) e frequentemente necessitam de interpolação para definir a intensidade dos novos pixels68.
+Em imagens de 8 bits, pode ser necessário realizar o **escalamento ou a média** para evitar valores acima de 255.
 
-Formas de Mapeamento:
-Direto: Mapeia da imagem de entrada para a de saída, podendo gerar posições sem pixels atribuídos ou com sobreposições8.
-Inverso: Varre a imagem de saída aplicando a matriz inversa ($T^{-1}$) e utiliza interpolação dos vizinhos mais próximos para determinar a intensidade.
-Principais Operações Geométricas:
-Translação: Move a imagem espacialmente nos eixos $x$ e $y$.
-Escala (Ampliação e Redução): Altera as dimensões da imagem.Rotação: Gira a imagem em torno de um ponto segundo um ângulo $\theta$.
-Espelhamento / Reflexão (Flip): Inverte a imagem na horizontal ou na vertical.
-Cisalhamento (Shear): Deforma a estrutura da imagem nas direções horizontal ou verticaL.
+### Subtração
+
+\(d(x,y) = f(x,y) - g(x,y)\)
+
+Utilizada para:
+
+* Destacar diferenças entre imagens;
+* Detectar alterações entre frames;
+* Evidenciar estruturas em aplicações médicas, como na angiografia por subtração digital.
+
+## Operações Geométricas
+
+As transformações geométricas alteram a **posição ou a dimensão dos pixels**, mapeando as coordenadas da imagem original para novas posições.
+
+O mapeamento pode ser:
+
+* **Direto:** leva os pixels da imagem original para a imagem de saída, podendo gerar espaços vazios ou sobreposições.
+* **Inverso:** parte da imagem de saída e utiliza a transformação inversa para encontrar os pixels correspondentes na imagem original.
+
+### Principais Transformações
+
+* **Translação:** desloca a imagem nos eixos X e Y.
+* **Escala:** amplia ou reduz a imagem.
+* **Rotação:** gira a imagem em torno de um ponto.
+* **Espelhamento (Flip):** inverte a imagem horizontal ou verticalmente.
+* **Cisalhamento (Shear):** inclina ou deforma a imagem horizontal ou verticalmente.
+
+As transformações geométricas podem utilizar **interpolação** para determinar os valores dos pixels que surgem durante o processo.
