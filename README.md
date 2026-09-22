@@ -34,6 +34,26 @@ Utilizada para:
 * Detectar alterações entre frames;
 * Evidenciar estruturas em aplicações médicas, como na angiografia por subtração digital.
 
+## Transformação Negativa de Intensidade
+
+A **transformação negativa** inverte os níveis de intensidade de cada pixel da imagem.
+
+### Fórmula
+
+\(s = (L - 1) - r\)
+
+Onde:
+
+* **$r$:** intensidade original do pixel;
+* **$s$:** nova intensidade do pixel;
+* **$L$:** quantidade de níveis de intensidade da imagem.
+
+Para imagens de 8 bits:
+
+\(s = 255 - r\)
+
+A transformação converte **tons claros em escuros e tons escuros em claros**, sendo útil para destacar detalhes claros presentes em regiões predominantemente escuras, como em imagens médicas.
+
 ## Operações Geométricas
 
 As transformações geométricas alteram a **posição ou a dimensão dos pixels**, mapeando as coordenadas da imagem original para novas posições.
