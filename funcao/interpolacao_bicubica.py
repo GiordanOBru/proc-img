@@ -80,7 +80,7 @@ def ampliacao_bicubica(img):
 
 def main():
     #lê imagem e reduz ela e salva em variavel
-    imagem = cv2.imread('imagens\cubo.png')
+    imagem = cv2.imread('imagens/cubo.png')
     img_reduzida = reducao_bicubica(imagem)
     img_ampliada = ampliacao_bicubica(imagem)
 

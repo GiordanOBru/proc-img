@@ -53,7 +53,7 @@ def main():
     #lê imagem e deixa em tons de cinza
     #8,16,32,64,128,256...8 em 8 bits
     nivel = 128
-    imgA = cv2.imread('imagens\imgA.png', cv2.IMREAD_GRAYSCALE)
+    imgA = cv2.imread('imagens/imgA.png', cv2.IMREAD_GRAYSCALE)
     img_equalizada = equalizacao(imgA, nivel)
 
     #gera nova imagem equalizada

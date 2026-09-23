@@ -76,7 +76,7 @@ def ampliacao_bilinear(img):
 
 def main():
     #lê imagem e reduz ela e salva em variavel
-    imagem = cv2.imread('imagens\cubo.png')
+    imagem = cv2.imread('imagens/cubo.png')
     img_reduzida = reducao_bilinear(imagem)
     img_ampliada = ampliacao_bilinear(imagem)
 
