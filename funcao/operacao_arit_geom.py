@@ -66,8 +66,8 @@ def operacao_geo_reflexao(img):
 
 def main():
     #lê imagem e reduz ela e salva em variavel
-    imgA = cv2.imread('imagens\imgA.png', cv2.IMREAD_GRAYSCALE)
-    imgB = cv2.imread('imagens\imgB.png', cv2.IMREAD_GRAYSCALE)
+    imgA = cv2.imread('imagens/imgA.png', cv2.IMREAD_GRAYSCALE)
+    imgB = cv2.imread('imagens/imgB.png', cv2.IMREAD_GRAYSCALE)
     img_soma = adicao_aritmetica(imgA, imgB)
     img_sub = subtracao_aritmetica(imgA, imgB)
     img_geo = operacao_geo_reflexao(imgA)
