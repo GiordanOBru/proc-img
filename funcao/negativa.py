@@ -23,7 +23,7 @@ def negativa(img):
 
 def main():
     #lê imagem e deixa em tons de cinza
-    imgB = cv2.imread('imagens\imgB.png', cv2.IMREAD_GRAYSCALE)
+    imgB = cv2.imread('imagens/imgB.png', cv2.IMREAD_GRAYSCALE)
     img_negativa = negativa(imgB)
 
     #gera nova imagem negativa
