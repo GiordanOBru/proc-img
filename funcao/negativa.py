@@ -13,7 +13,7 @@ def negativa(img):
     #Soma simples entre pixels 
     for i in range(altura - 1):
         for j in range(largura - 1):
-            #analisa pixel e transforma em negativo
+            #guarda pixel original e calcula o negativo subtraindo de 255
             pixel_positivo = img[i,j]
             pixel_negativo = 255 - pixel_positivo
 

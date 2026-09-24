@@ -21,18 +21,19 @@ def equalizacao(img, nivel):
     #matriz nova para equalizar
     img_equalizada = np.zeros((altura, largura), dtype=np.uint8)
 
-    #contando tons existentes no histograma
+    #separa a quantidade do tom de cinza e guarda informação
     for i in range(altura):
         for j in range(largura):
             tom = img[i,j]
             histograma[tom] += 1
 
-    #declarando as variaveis utilizadas mais tarde
+    #declarando as variaveis
     freq_acumulada = 0
     quantidade_total = altura*largura
 
-    #Aplica a fórmula (L - 1) * freq_acumulada arredondado
+    #Aplica a fórmula (L - 1) * freq_acumulada
     for i in range(nivel_cinza):
+        #probabilidade é quantidade do tom pela sua variação de cinza
         probabilidade = histograma[i]/quantidade_total
         freq_acumulada += probabilidade
         ajuste_final[i] = round((nivel_cinza-1)*freq_acumulada)
@@ -40,6 +41,8 @@ def equalizacao(img, nivel):
     #finalizando equalização
     for i in range(altura):
         for j in range(largura):
+            #apartir do valor do pixel original, pega o valor da equalização
+            #e ajusta em uma nova imagem equalizada
             img_equalizada[i,j] = ajuste_final[img[i,j]]
 
     #ajuste de escala de acordo nível reduzido
