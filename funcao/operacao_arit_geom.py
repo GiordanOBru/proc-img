@@ -11,7 +11,7 @@ def adicao_aritmetica(imgA, imgB):
     imgA = cv2.resize(imgA, (largura, altura))
     imgB = cv2.resize(imgB, (largura, altura))
 
-    #matriz resultante da soma
+    #matriz resultante da soma dos pixels img_final
     img_soma = np.zeros((altura, largura), dtype=np.uint8)
 
     #Soma simples entre pixels 
@@ -30,7 +30,7 @@ def subtracao_aritmetica(imgA, imgB):
     imgA = cv2.resize(imgA, (largura, altura))
     imgB = cv2.resize(imgB, (largura, altura))
 
-    #matriz resultante da soma
+    #matriz resultante da subtração dos pixels
     img_sub = np.zeros((altura, largura), dtype=np.uint8)
 
     #Soma simples entre pixels 
