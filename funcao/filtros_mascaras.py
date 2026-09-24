@@ -3,36 +3,43 @@ import cv2
 import numpy as np
 import math
 
+#realça as bordas da imagem, pegando as informações em horizontal e vertical
 MASCARALAPLACIANO_1 = np.array([
     [0,1,0],
     [1,-4,1],
     [0,1,0]
 ])
 
+#realça as bordas da imagem, com as informações em diagonal e horizontal/vertical
 MASCARALAPLACIANO_2 = np.array([
     [1,1,1],
     [1,-8,1],
     [1,1,1]
 ])
 
+#realça as bordas da imagem, pegando as informações em horizontal e vertical
+#invertendo a máscara MASCARALAPLACIANO_1 
 MASCARALAPLACIANO_3 = np.array([
     [0,-1,0],
     [-1,4,-1],
     [0,-1,0]
 ])
-
+#realça as bordas da imagem, com as informações em diagonal e horizontal/vertical
+#invertendo a máscara MASCARALAPLACIANO_2
 MASCARALAPLACIANO_4 = np.array([
     [-1,-1,-1],
     [-1,8,-1],
     [-1,-1,-1]
 ])
 
+#realça as bordas da imagem, pegando as informações em horizontal e vertical
 SOBELX = np.array([
     [-1,-2,-1],
     [0,0,0],
     [1,2,1]
 ])
 
+#realça as bordas da imagem, pegando as informações em horizontal e vertical
 SOBELY = np.array([
     [-1,0,1],
     [-2,0,2],
